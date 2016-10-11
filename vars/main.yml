@@ -1,0 +1,106 @@
+urls:
+    6.7.0:
+        checksum:
+            file: SHASUMS256.txt
+            dir: null
+            url: 'https://nodejs.org/dist/v6.7.0/SHASUMS256.txt'
+            hash: B23F586DC8311A3C0BD2DB1CDA9ADA2671E439FBB12EA33212113443A604AC8A
+        signature:
+            file: SHASUMS256.txt.asc
+            dir: null
+            url: 'https://nodejs.org/dist/v6.7.0/SHASUMS256.txt.asc'
+            hash: E00E3EC55B3CBEDF4F361A78F6EE4753294D74BA574DB2F6BF3DE599B123D70D
+        binaries:
+            file: node-v6.7.0-linux-x64.tar.gz
+            dir: node-v6.7.0-linux-x64
+            url: 'https://nodejs.org/dist/v6.7.0/node-v6.7.0-linux-x64.tar.gz'
+            hash: ABE81B4150917CDBBEEBC6C6B85003B80C972D32C8F5DFD2970D32E52A6877AF
+        source:
+            file: node-v6.7.0.tar.gz
+            dir: node-v6.7.0
+            url: 'https://nodejs.org/dist/v6.7.0/node-v6.7.0.tar.gz'
+            hash: 02B8EE1719A11B9AB22BEF9279519EFAAF31DD0D39CBA4C3A1176CCDA400B8D6
+    5.12.0:
+        checksum:
+            file: SHASUMS256.txt
+            dir: null
+            url: 'https://nodejs.org/dist/v5.12.0/SHASUMS256.txt'
+            hash: F0D1845E6619AE033E656C4424D9D2579A8C19063446BD9C21B9F433079752C3
+        signature:
+            file: SHASUMS256.txt.asc
+            dir: null
+            url: 'https://nodejs.org/dist/v5.12.0/SHASUMS256.txt.asc'
+            hash: 0FF2ADB00B1777771863F458C6260DF16F9B8A30BF3CAD64E7D35C2FE8230006
+        binaries:
+            file: node-v5.12.0-linux-x64.tar.gz
+            dir: node-v5.12.0-linux-x64
+            url: 'https://nodejs.org/dist/v5.12.0/node-v5.12.0-linux-x64.tar.gz'
+            hash: C0F459152AA87ABA8A019A95899352170DB0D8D52C860715C88356CB253FE2C4
+        source:
+            file: node-v5.12.0.tar.gz
+            dir: node-v5.12.0
+            url: 'https://nodejs.org/dist/v5.12.0/node-v5.12.0.tar.gz'
+            hash: 250C12A561D7319E71E142EE92AB682494C7823D81CE24703C80EB52BDF9BA42
+    4.6.0:
+        checksum:
+            file: SHASUMS256.txt
+            dir: null
+            url: 'https://nodejs.org/dist/v4.6.0/SHASUMS256.txt'
+            hash: BCA6D7374E25B640DD68459BE681668B82C9B760E360E44C7D3DF3CDD765F0F3
+        signature:
+            file: SHASUMS256.txt.asc
+            dir: null
+            url: 'https://nodejs.org/dist/v4.6.0/SHASUMS256.txt.asc'
+            hash: 6E71E8F7CCA642FA2C5F1E93D4D575F8FEA159D061C2FDDD0A77A4521AE82A5F
+        binaries:
+            file: node-v4.6.0-linux-x64.tar.gz
+            dir: node-v4.6.0-linux-x64
+            url: 'https://nodejs.org/dist/v4.6.0/node-v4.6.0-linux-x64.tar.gz'
+            hash: ACF08148CECF245F28126122AC9128FF9909F00938B18D80FC0B92648D1C98A8
+        source:
+            file: node-v4.6.0.tar.gz
+            dir: node-v4.6.0
+            url: 'https://nodejs.org/dist/v4.6.0/node-v4.6.0.tar.gz'
+            hash: 0838F12E329EDB252E6E6BADDCA85632BF5FF2EC900E737E88F9BF9B38946B1B
+    0.12.16:
+        checksum:
+            file: SHASUMS256.txt
+            dir: null
+            url: 'https://nodejs.org/dist/v0.12.16/SHASUMS256.txt'
+            hash: C762516F3E7D33F5CD746FC98CE5ADECEB3E8DB10F838D63AD88D1BCEEF1B812
+        signature:
+            file: SHASUMS256.txt.asc
+            dir: null
+            url: 'https://nodejs.org/dist/v0.12.16/SHASUMS256.txt.asc'
+            hash: 7BBB54C53C2045D3393BCADA23B0DBBDCB451CAB77189B858B6AA861636FFBBB
+        binaries:
+            file: node-v0.12.16-linux-x64.tar.gz
+            dir: node-v0.12.16-linux-x64
+            url: 'https://nodejs.org/dist/v0.12.16/node-v0.12.16-linux-x64.tar.gz'
+            hash: D9E1CD239844F2A5641E02E48B3C7955E3E73FF3C3D20629C24B561F08AB8219
+        source:
+            file: node-v0.12.16.tar.gz
+            dir: node-v0.12.16
+            url: 'https://nodejs.org/dist/v0.12.16/node-v0.12.16.tar.gz'
+            hash: 312C0B74B0815F0514DE9BF00667850D4F6CE184126F02F3D8DBF40FD48235EB
+    0.10.47:
+        signature:
+            file: SHASUMS256.txt.asc
+            dir: null
+            url: 'https://nodejs.org/dist/v0.10.47/SHASUMS256.txt.asc'
+            hash: 501BB2003EF0B5BBBBD360443DCA88BBF21899673F01B997C44772A25D842652
+        checksum:
+            file: SHASUMS256.txt
+            dir: null
+            url: 'https://nodejs.org/dist/v0.10.47/SHASUMS256.txt'
+            hash: FDAC5CA60A48C28E1C9D77150E1D47F1792BF86CF04E10AD455FCC7D30F18964
+        binaries:
+            file: node-v0.10.47-linux-x64.tar.gz
+            dir: node-v0.10.47-linux-x64
+            url: 'https://nodejs.org/dist/v0.10.47/node-v0.10.47-linux-x64.tar.gz'
+            hash: 80757AE8F7BC3161FE44615344C784918EBD93A51CA6F789A75E3D472972EB77
+        source:
+            file: node-v0.10.47.tar.gz
+            dir: node-v0.10.47
+            url: 'https://nodejs.org/dist/v0.10.47/node-v0.10.47.tar.gz'
+            hash: 5281FA7DDFF755C34602A09EF8027F0BDA0F7851B1E374FD0E0C33DA93123056

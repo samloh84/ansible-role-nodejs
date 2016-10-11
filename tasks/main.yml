@@ -1,0 +1,80 @@
+- set_fact:
+    distribution: "{% if compile %}source{% else %}binaries{% endif %}"
+
+- set_fact:
+    temp_dir: "/tmp/nodejs/nodejs-{{ nodejs_version }}"
+    download_dir: "{{ role_path }}/files"
+    nodejs_home: "{{ prefix }}/{{ urls[nodejs_version][distribution].dir }}"
+    nodejs_url: "{{ urls[nodejs_version][distribution].url }}"
+    nodejs_hash: "{{ urls[nodejs_version][distribution].hash }}"
+    nodejs_filename: "{{ urls[nodejs_version][distribution].file }}"
+
+- set_fact:
+    src_dir: "{{ temp_dir }}/{{ urls[nodejs_version].source.dir }}"
+    nodejs_file: "{{ temp_dir }}/{{ nodejs_filename }}"
+    nodejs_download_path: "{{ download_dir }}/{{ nodejs_filename }}"
+
+- file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ temp_dir }}"
+    - "{{ nodejs_home }}"
+
+- yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gcc
+    - gcc-c++
+
+- file:
+    path: "{{ role_path }}/files"
+    state: directory
+  delegate_to: 127.0.0.1
+
+- name: "Download Node.js"
+  delegate_to: 127.0.0.1
+  get_url:
+    url: "{{ nodejs_url }}"
+    dest: "{{ nodejs_download_path }}"
+    checksum: "sha256:{{ nodejs_hash }}"
+
+- name: "Copy Node.js"
+  copy:
+    src: "{{ nodejs_download_path }}"
+    dest: "{{ nodejs_file }}"
+
+- name: "Extract Node.js"
+  unarchive:
+    src: "{{ nodejs_file }}"
+    dest: "{{ prefix }}"
+    remote_src: yes
+
+
+- name: "Compile Node.js"
+  command: "./configure  --prefix {{ nodejs_home }}"
+  args:
+    chdir: "{{ src_dir }}"
+  when: compile
+
+- command: "make"
+  args:
+    chdir: "{{ src_dir }}"
+  when: compile
+
+- command: "make install"
+  args:
+    chdir: "{{ src_dir }}"
+  when: compile
+
+
+- template:
+    src: "templates/nodejs.sh.j2"
+    dest: "/etc/profile.d/nodejs.sh"
+
+- name: Clean Temporary files
+  file:
+    path: "{{ temp_dir }}"
+    state: absent
+

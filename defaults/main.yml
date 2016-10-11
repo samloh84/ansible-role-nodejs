@@ -1,0 +1,3 @@
+nodejs_version: 6.7.0
+prefix: "/opt/nodejs"
+compile: no
