@@ -32,7 +32,8 @@ MIT
 
 Testing
 -------
-Run the following command:
+Run one of the following commands:
 
         ansible-playbook nodejs/tests/test.yml
+        ansible-playbook --extra-vars "compile: true" nodejs/tests/test.yml
 

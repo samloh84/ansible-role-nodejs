@@ -13,6 +13,7 @@
     nodejs_home: "{{ prefix }}/{{ nodejs_dir }}"
     nodejs_archive_temp_path: "{{ temp_dir }}/{{ nodejs_filename }}"
     nodejs_archive_download_path: "{{ download_dir }}/{{ nodejs_filename }}"
+    nodejs_temp_path: "{{ temp_dir }}/{{ nodejs_dir }}"
 
 - name: "Create Temporary Directory {{ temp_dir }}"
   file:
@@ -53,24 +54,30 @@
     src: "{{ nodejs_archive_temp_path }}"
     dest: "{{ prefix }}"
     remote_src: yes
+  when: not compile
 
+- name: "Extract Node.js archive to Directory: {{ temp_dir }}"
+  unarchive:
+    src: "{{ nodejs_archive_temp_path }}"
+    dest: "{{ temp_dir }}"
+    remote_src: yes
+  when: compile
 
 - name: "Compile Node.js"
   command: "./configure  --prefix {{ nodejs_home }}"
   args:
-    chdir: "{{ src_dir }}"
+    chdir: "{{ nodejs_temp_path }}"
   when: compile
 
 - command: "make"
   args:
-    chdir: "{{ src_dir }}"
+    chdir: "{{ nodejs_temp_path }}"
   when: compile
 
 - command: "make install"
   args:
-    chdir: "{{ src_dir }}"
+    chdir: "{{ nodejs_temp_path }}"
   when: compile
-
 
 - name: "Install Node.js environment variables"
   template:
