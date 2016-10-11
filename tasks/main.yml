@@ -1,7 +1,7 @@
 - set_fact:
     distribution: "{% if compile %}source{% else %}binaries{% endif %}"
     download_dir: "{{ role_path }}/files"
-    temp_dir: "/tmp/nodejs/nodejs-{{ nodejs_version }}"
+    temp_dir: "{{ tmp_prefix }}/nodejs-{{ nodejs_version }}"
 
 - set_fact:
     nodejs_dir: "{{ urls[nodejs_version][distribution].dir }}"
@@ -14,12 +14,12 @@
     nodejs_archive_temp_path: "{{ temp_dir }}/{{ nodejs_filename }}"
     nodejs_archive_download_path: "{{ download_dir }}/{{ nodejs_filename }}"
 
-- name: "Create Temporary Directory {{temp_dir}}"
+- name: "Create Temporary Directory {{ temp_dir }}"
   file:
     path: "{{ temp_dir }}"
     state: directory
 
-- name: "Create Node.js Directory {{nodejs_home}}"
+- name: "Create Node.js Directory {{ nodejs_home }}"
   file:
     path: "{{ nodejs_home }}"
     state: directory
@@ -79,5 +79,5 @@
 
 - name: "Clean Temporary files"
   file:
-    path: "{{ temp_dir }}"
+    path: "{{ tmp_prefix }}"
     state: absent

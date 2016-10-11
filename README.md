@@ -30,3 +30,9 @@ License
 
 MIT
 
+Testing
+-------
+Run the following command:
+
+        ansible-playbook nodejs/tests/test.yml
+
