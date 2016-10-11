@@ -1,53 +1,56 @@
 - set_fact:
     distribution: "{% if compile %}source{% else %}binaries{% endif %}"
+    download_dir: "{{ role_path }}/files"
+    temp_dir: "/tmp/nodejs/nodejs-{{ nodejs_version }}"
 
 - set_fact:
-    temp_dir: "/tmp/nodejs/nodejs-{{ nodejs_version }}"
-    download_dir: "{{ role_path }}/files"
-    nodejs_home: "{{ prefix }}/{{ urls[nodejs_version][distribution].dir }}"
+    nodejs_dir: "{{ urls[nodejs_version][distribution].dir }}"
     nodejs_url: "{{ urls[nodejs_version][distribution].url }}"
     nodejs_hash: "{{ urls[nodejs_version][distribution].hash }}"
     nodejs_filename: "{{ urls[nodejs_version][distribution].file }}"
 
 - set_fact:
-    src_dir: "{{ temp_dir }}/{{ urls[nodejs_version].source.dir }}"
-    nodejs_file: "{{ temp_dir }}/{{ nodejs_filename }}"
-    nodejs_download_path: "{{ download_dir }}/{{ nodejs_filename }}"
+    nodejs_home: "{{ prefix }}/{{ nodejs_dir }}"
+    nodejs_archive_temp_path: "{{ temp_dir }}/{{ nodejs_filename }}"
+    nodejs_archive_download_path: "{{ download_dir }}/{{ nodejs_filename }}"
 
-- file:
-    path: "{{ item }}"
+- name: "Create Temporary Directory {{temp_dir}}"
+  file:
+    path: "{{ temp_dir }}"
     state: directory
-  with_items:
-    - "{{ temp_dir }}"
-    - "{{ nodejs_home }}"
 
-- yum:
-    name: "{{ item }}"
+- name: "Create Node.js Directory {{nodejs_home}}"
+  file:
+    path: "{{ nodejs_home }}"
+    state: directory
+
+- name: "Install GCC C++"
+  yum:
+    name: "gcc-c++"
     state: present
-  with_items:
-    - gcc
-    - gcc-c++
 
-- file:
-    path: "{{ role_path }}/files"
-    state: directory
+- name: "Create Download Directory on control server: {{ download_dir }}"
   delegate_to: 127.0.0.1
+  file:
+    path: "{{ download_dir }}"
+    state: directory
 
-- name: "Download Node.js"
+
+- name: "Download Node.js archive to control server Download Path: {{ nodejs_archive_download_path }}"
   delegate_to: 127.0.0.1
   get_url:
     url: "{{ nodejs_url }}"
-    dest: "{{ nodejs_download_path }}"
+    dest: "{{ nodejs_archive_download_path }}"
     checksum: "sha256:{{ nodejs_hash }}"
 
-- name: "Copy Node.js"
+- name: "Copy Node.js archive to Temporary Path: {{ nodejs_archive_temp_path }}"
   copy:
-    src: "{{ nodejs_download_path }}"
-    dest: "{{ nodejs_file }}"
+    src: "{{ nodejs_archive_download_path }}"
+    dest: "{{ nodejs_archive_temp_path }}"
 
-- name: "Extract Node.js"
+- name: "Extract Node.js archive to Directory: {{ prefix }}"
   unarchive:
-    src: "{{ nodejs_file }}"
+    src: "{{ nodejs_archive_temp_path }}"
     dest: "{{ prefix }}"
     remote_src: yes
 
@@ -69,12 +72,12 @@
   when: compile
 
 
-- template:
+- name: "Install Node.js environment variables"
+  template:
     src: "templates/nodejs.sh.j2"
     dest: "/etc/profile.d/nodejs.sh"
 
-- name: Clean Temporary files
+- name: "Clean Temporary files"
   file:
     path: "{{ temp_dir }}"
     state: absent
-
