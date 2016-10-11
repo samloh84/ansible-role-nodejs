@@ -1,4 +1,4 @@
 nodejs_version: 6.7.0
 prefix: "/opt/nodejs"
-tmp_prefix: "/tmp/java"
+tmp_prefix: "/tmp/nodejs"
 compile: no
