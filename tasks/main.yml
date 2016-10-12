@@ -64,17 +64,17 @@
   when: compile
 
 - name: "Compile Node.js"
-  command: "./configure  --prefix {{ nodejs_home }}"
+  shell: "./configure  --prefix {{ nodejs_home }}"
   args:
     chdir: "{{ nodejs_temp_path }}"
   when: compile
 
-- command: "make"
+- shell: "make"
   args:
     chdir: "{{ nodejs_temp_path }}"
   when: compile
 
-- command: "make install"
+- shell: "make install"
   args:
     chdir: "{{ nodejs_temp_path }}"
   when: compile
