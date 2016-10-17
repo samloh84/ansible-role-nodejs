@@ -83,6 +83,7 @@
   template:
     src: "nodejs.sh.j2"
     dest: "/etc/profile.d/nodejs.sh"
+    mode: 0644
 
 - name: "Upgrade NPM"
   shell: "source /etc/profile.d/nodejs.sh && npm install -g npm"
