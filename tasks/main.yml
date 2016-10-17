@@ -81,8 +81,11 @@
 
 - name: "Install Node.js environment variables"
   template:
-    src: "templates/nodejs.sh.j2"
+    src: "nodejs.sh.j2"
     dest: "/etc/profile.d/nodejs.sh"
+
+- name: "Upgrade NPM"
+  shell: "source /etc/profile.d/nodejs.sh && npm install -g npm"
 
 - name: "Clean Temporary files"
   file:
