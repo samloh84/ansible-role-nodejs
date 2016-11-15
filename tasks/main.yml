@@ -65,16 +65,19 @@
   shell: "./configure  --prefix {{ nodejs_home }}"
   args:
     chdir: "{{ nodejs_temp_path }}"
+    executable: /bin/bash
   when: compile
 
 - shell: "make"
   args:
     chdir: "{{ nodejs_temp_path }}"
+    executable: /bin/bash
   when: compile
 
 - shell: "make install"
   args:
     chdir: "{{ nodejs_temp_path }}"
+    executable: /bin/bash
   when: compile
 
 - name: "Install Node.js environment variables"
@@ -85,6 +88,8 @@
 
 - name: "Upgrade NPM"
   shell: "source /etc/profile.d/nodejs.sh && npm install -g npm"
+  args:
+    executable: /bin/bash
 
 - name: "Clean Temporary files"
   file:
@@ -93,6 +98,8 @@
 
 - name: "Fix Permissions"
   shell: "{{ item }}"
+  args:
+    executable: /bin/bash
   with_items:
     - "chown -R root:root {{ nodejs_home }}"
     - "find {{ nodejs_home }} -perm -u+r -exec chmod a+r {} \\;"
